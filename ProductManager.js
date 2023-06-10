@@ -1,49 +1,84 @@
+const fs = require('fs');
+
 class ProductManager {
- 
-    constructor () {
-        this.products = [];
-        this.ultID = 0;
+  constructor(path) {
+    this.path = path;
+    this.products = [];
+    this.lastId = 0;
+    this.loadProducts();
+  }
+
+  loadProducts() {
+    try {
+      const data = fs.readFileSync(this.path, 'utf-8');
+      this.products = JSON.parse(data);
+      if (this.products.length > 0) {
+        const lastProduct = this.products[this.products.length - 1];
+        this.lastId = lastProduct.id;
+      }
+    } catch (error) {
+      
+      this.products = [];
+      this.lastId = 0;
+      this.saveProducts();
     }
+  }
 
-    getProducts() {
-        const misProductos = this.products.map((product) => {return product;});
-        return misProductos;
+  saveProducts() {
+    try {
+      fs.writeFileSync(this.path, JSON.stringify(this.products, null, 2));
+    } catch (error) {
+      console.error('Error al guardar los productos:', error);
     }
+  }
 
-    addProducts = (title, description, price,thumbnail,code,stock) => {
-        const codigoUsado = this.products.some((product)=> product.code === code);
-        if(codigoUsado){
-            
-            console.log(`El codigo de ${title} ya usado, ingrese otro codigo`)
-        }
-        else{
-            const productID = this.createID();
-            const product = { id:productID, title, description, price,thumbnail,code,stock }
-            this.products.push(product)  
-        }
-        
+  addProduct(title, description, price, thumbnail, code, stock) {
+    const newProduct = {
+      id: ++this.lastId,
+      title,
+      description,
+      price,
+      thumbnail,
+      code,
+      stock,
+    };
+    this.products.push(newProduct);
+    this.saveProducts();
+    return newProduct;
+  }
+
+  getProductById(id) {
+    return this.products.find(product => product.id === id);
+  }
+
+  updateProduct(id, updates) {
+    const product = this.getProductById(id);
+    if (product) {
+      Object.assign(product, updates);
+      this.saveProducts();
+      return product;
     }
+    return null;
+  }
 
-    createID () {
-        this.ultID++;
-        return this.ultID;
+  deleteProduct(id) {
+    const index = this.products.findIndex(product => product.id === id);
+    if (index !== -1) {
+      const deletedProduct = this.products.splice(index, 1)[0];
+      this.saveProducts();
+      return deletedProduct;
     }
+    return null;
+  }
 
-    getProductsByID(id) {
-        for(const productID of this.products ){
-            if(productID.id == id){return productID}
-            else{return console.log("no Id registrado")}
-        }
-
-    }
-
+  getAllProducts() {
+    return this.products;
+  }
 }
 
 
-const productos = new ProductManager()
-productos.addProducts("prod 1","producto ... de ...",200,"img","asdada",25) 
-productos.addProducts("prod 2","producto ... de ...",300,"img","asdada",30) 
-productos.addProducts("prod 3","producto ... de ...",400,"img","asdasd",40)
-
-console.log("array de productos", productos.getProducts()) 
-console.log("Id de productos", productos.getProductsByID())
+const productManager = new ProductManager('products.json');
+productManager.addProduct('xbox', 'console', 399, 'xbox.jpg', 'xx33', 6);
+productManager.addProduct('ps5', 'console', 499, 'ps5.jpg', 'ps55', 6);
+const allProducts = productManager.getAllProducts();
+console.log(allProducts);

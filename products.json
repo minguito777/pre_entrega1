@@ -1,0 +1,30 @@
+[
+    {
+      "id": 1,
+      "title": "Nintendo switch",
+      "description": "consola de videojuegos",
+      "price": 599,
+      "thumbnail": "switch.jpg",
+      "code": "nin332",
+      "stock": 5
+    },
+    {
+      "id": 2,
+      "title": "Playstation 4",
+      "description": "consola de videojuegos",
+      "price": 399,
+      "thumbnail": "ps4.jpg",
+      "code": "ps44",
+      "stock": 3
+    },
+    {
+      "id": 3,
+      "title": "Xbox one",
+      "description": "consola de videojuegos",
+      "price": 250,
+      "thumbnail": "xbox1.jpg",
+      "code": "xx11",
+      "stock": 3
+    }
+  ]
+  
