@@ -48,7 +48,9 @@ class ProductManager {
   }
 
   getProductById(id) {
-    return this.products.find(product => product.id === id);
+    const datos = fs.readFileSync(this.path);
+    const products = JSON.parse(datos);
+    return products.find(product => product.id === id);
   }
 
   updateProduct(id, updates) {
@@ -72,7 +74,8 @@ class ProductManager {
   }
 
   getAllProducts() {
-    return this.products;
+    const datos = fs.readFileSync(this.path);
+    return JSON.parse(datos);
   }
 }
 
