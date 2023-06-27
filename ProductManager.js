@@ -1,4 +1,4 @@
-const fs = require('fs');
+import fs from 'fs';
 
 class ProductManager {
   constructor(path) {
@@ -77,7 +77,9 @@ class ProductManager {
     const datos = fs.readFileSync(this.path);
     return JSON.parse(datos);
   }
+  
 }
+export default ProductManager;
 
 
 const productManager = new ProductManager('products.json');

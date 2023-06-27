@@ -133,5 +133,59 @@
     "thumbnail": "ps5.jpg",
     "code": "ps55",
     "stock": 6
+  },
+  {
+    "id": 16,
+    "title": "xbox",
+    "description": "console",
+    "price": 399,
+    "thumbnail": "xbox.jpg",
+    "code": "xx33",
+    "stock": 6
+  },
+  {
+    "id": 17,
+    "title": "ps5",
+    "description": "console",
+    "price": 499,
+    "thumbnail": "ps5.jpg",
+    "code": "ps55",
+    "stock": 6
+  },
+  {
+    "id": 18,
+    "title": "xbox",
+    "description": "console",
+    "price": 399,
+    "thumbnail": "xbox.jpg",
+    "code": "xx33",
+    "stock": 6
+  },
+  {
+    "id": 19,
+    "title": "ps5",
+    "description": "console",
+    "price": 499,
+    "thumbnail": "ps5.jpg",
+    "code": "ps55",
+    "stock": 6
+  },
+  {
+    "id": 20,
+    "title": "xbox",
+    "description": "console",
+    "price": 399,
+    "thumbnail": "xbox.jpg",
+    "code": "xx33",
+    "stock": 6
+  },
+  {
+    "id": 21,
+    "title": "ps5",
+    "description": "console",
+    "price": 499,
+    "thumbnail": "ps5.jpg",
+    "code": "ps55",
+    "stock": 6
   }
 ]
